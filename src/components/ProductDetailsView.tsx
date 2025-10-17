@@ -1,41 +1,41 @@
-import React from "react";
+import { useParams, Link } from "react-router-dom";
 import { getProductById } from "../products";
 
-const ProductDetailsView = () => {
-  // Replace this static product id with a dynamic one retrieved from the router
-  // See documentation on how to retrieve the id from the router
-  // https://reactrouter.com/start/declarative/routing#dynamic-segments
-  const id = 1;
+function ProductDetailsView() {
+  const { id } = useParams();
+  const product = getProductById(Number(id));
 
-  // getProductById is a function to fetch product details from the products.js file.
-  // In a real application, this would be an API call to the backend.
-  const product = getProductById(id);
+  if (!product) return <p>Product not found</p>;
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>{product.name}</h2>
-      <div style={{ display: "flex" }}>
-        <div style={{ marginRight: "20px" }}>
-          <img src="http://via.placeholder.com/400x400" alt="Placeholder" />
+
+      <div style={{ display: "flex", gap: "40px", alignItems: "flex-start" }}>
+        <div
+          style={{
+            background: "#ddd",
+            width: "400px",
+            height: "400px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Image placeholder
         </div>
+
         <div>
-          <h3>${product.price}</h3>
-          <p>Description: {product.description}</p>
-          <p>Category: {product.category}</p>
-          <p>In Stock: {product.stock} pcs</p>
-          <p>Rating: {product.rating} / 5.0</p>
-          <div style={{ marginTop: "20px" }}>
-            {/* No functionality is required for this button */}
-            <button>Add to Cart</button>{" "}
-          </div>
-          <div style={{ marginTop: "20px" }}>
-            {/* Replace anchor element with router Link */}
-            <a href="#">Back to Products</a>
-          </div>
+          <p><strong>Category:</strong> {product.category}</p>
+          <p><strong>Price:</strong> €{product.price}</p>
+          <p><strong>Description:</strong> {product.description}</p>
+          <p><strong>Stock:</strong> {product.stock}</p>
+          <p><strong>Rating:</strong> {product.rating}</p>
+          <Link to="/">← Back to Products</Link>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default ProductDetailsView;

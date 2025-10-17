@@ -1,18 +1,24 @@
-import React from "react";
-import styles from "./Product.module.css";
+import { Link } from "react-router-dom";
 
-/* This component is used to display a single product in the products view. */
+type ProductType = {
+  id: string | number;
+  name: string;
+  price: number;
+};
 
-export default function Product({ id, imagePath, name, price }) {
+interface Props {
+  product: ProductType;
+}
+
+function Product({ product }: Props): JSX.Element {
   return (
-    <div className={styles.product} key={id} data-testid={`product-${id}`}>
-      <img src={imagePath} alt="Placeholder" />
-      <div>{name}</div>
-      <div>${price}</div>
-      <div>
-        {/* Replace anchor element with router Link */}
-        <a href="#">View Details</a>
-      </div>
+    <div className="product-card" data-testid={`product-${product.id}`}>
+      <div>200 x 200</div>
+      <h4>{product.name}</h4>
+      <p>${product.price}</p>
+      <Link to={`/products/${product.id}`}>View Details</Link>
     </div>
   );
 }
+
+export default Product;

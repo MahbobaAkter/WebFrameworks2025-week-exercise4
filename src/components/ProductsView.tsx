@@ -1,27 +1,25 @@
-import React from "react";
-import styles from "./ProductsView.module.css";
 import { getAllProducts } from "../products";
 import Product from "./Product";
 
-const ProductsView = () => {
+function ProductsView() {
   const products = getAllProducts();
 
   return (
-    <div>
-      <h1>Shop Products</h1>
-      <div className={styles.products}>
-        {products.map((product) => (
-          <Product
-            key={product.id}
-            name={product.name}
-            id={product.id}
-            price={product.price}
-            imagePath="http://via.placeholder.com/200x200"
-          />
+    <div style={{ padding: "20px" }}>
+      <h2>Shop Products</h2>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+        }}
+      >
+        {products.map((p) => (
+          <Product key={p.id} product={p} />
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default ProductsView;
