@@ -1,7 +1,7 @@
 function CartView() {
   return (
     <div className="cart-container">
-      <h2>Cart Page</h2>
+      <h2>Cart View</h2>
       <ul>
         <li>
           Product A <button>Remove</button>
